@@ -116,6 +116,21 @@ function clearCalc(){
     console.log("cleared.");
 }
 
+function deleteVal(){
+    if(display_value == 0){
+        return;
+    }
+    let str = display_value.toString();
+    let new_str = str.slice(0, str.length - 1);
+    if(new_str.length <= 0){
+        display_value = 0;
+        updateDisplayValue();
+        return;
+    }
+    display_value = parseFloat(new_str);
+    updateDisplayValue();
+}
+
 //Updates the text in the top portion of the calculator to match what was pressed by the user.
 function updateDisplayValue(){
     document.getElementById('screen_top').innerHTML = display_value;
