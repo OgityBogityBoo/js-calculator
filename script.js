@@ -50,6 +50,7 @@ function operatorButton(val){
     updateDisplayValue();
 }
 
+//Based on the operator button selection, which is a series of 1-4 values, each designated to an operation, calls the respective operation function to calculate the given numbers.
 function equal(){
     second_value = display_value;
     if(operator == 1){
@@ -67,6 +68,7 @@ function equal(){
     }
 }
 
+//Adds the first and second value together and displays the result.
 function addition(){
     console.log("adding...");
     let c = first_value + second_value;
@@ -74,6 +76,7 @@ function addition(){
     updateTotalValue();
 }
 
+//Subtracts the second value from the first value and displays the result.
 function subtraction(){
     console.log("subtracting...");
     let c = first_value - second_value;
@@ -81,6 +84,7 @@ function subtraction(){
     updateTotalValue();
 }
 
+//Multiples the first and second value together and displays the result.
 function multiply(){
     console.log("multiplying...");
     let c = first_value * second_value;
@@ -88,17 +92,45 @@ function multiply(){
     updateTotalValue();
 }
 
+//Divides the first and second value in the calculation. Does not allow for division by 0.
 function divide(){
     console.log("dividing...");
+    if(second_value == 0){
+        display_value = "Divide by 0? No way Jose.";
+        updateDisplayValue();
+        first_value = 0;
+        second_value = 0;
+        return;
+    }
     let c = first_value / second_value;
     total_value = c;
     updateTotalValue();
 }
 
+//Called by the Square Root button.
+//Calls the Math.sqrt js function to get the square root.
+function sqrt(){
+    console.log("square root of display value");
+    let c = Math.sqrt(display_value);
+    total_value = c;
+    updateTotalValue();
+}
+
+//Called when the +/- button is pressed.
+//Changes the sign of the value entered by the user by multiplying the value by -1.
+function signChange(){
+    display_value = display_value * -1;
+    updateDisplayValue();
+}
+
+//Updates the total_value, which is the bottom larger number on the calculator screen. This is the saved value or total value in the calculation as opposed to the smaller value at the top of the screen which is the temporary value the user is entering into the calculator.
 function updateTotalValue(){
     document.getElementById('screen_bottom').innerHTML = total_value;
 }
 
+//Called when the Decimal button is pressed.
+//Sets awaiting_decimal to true.
+//When true, the next number pressed will have a decimal precede it.
 function decimal(){
     console.log('we got ourselves a decimal');
     awaiting_decimal = true;
@@ -116,13 +148,16 @@ function clearCalc(){
     console.log("cleared.");
 }
 
+//Deletes the last entered value to the display_value, which is the temporary number the user is typing into the calculator
+//If the value is 0, we return preventing NaN error
+//If the value is empty or is a leftover '-' negative sign, we swap for 0 and return to avoid NaN issues.
 function deleteVal(){
     if(display_value == 0){
         return;
     }
     let str = display_value.toString();
     let new_str = str.slice(0, str.length - 1);
-    if(new_str.length <= 0){
+    if(new_str.length <= 0 || new_str == "-"){
         display_value = 0;
         updateDisplayValue();
         return;
