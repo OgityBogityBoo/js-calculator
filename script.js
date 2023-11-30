@@ -1,4 +1,5 @@
-let display_value = 0;
+let display_value = '';
+let working_value = 0;
 let first_value = 0;
 let second_value = 0;
 let total_value = 0;
@@ -13,46 +14,46 @@ let awaiting_decimal = false;
 //A 'val' is passed into the function, designating the value of the button pressed. i.e. 1, 2, 3, 4, etc.
 //If the display_value is 0 it will be replaced with the value of the button pressed. If the value is not zero, it will convert the value to a string to add the pressed value at the end and convert it back into a floating number.
 function btnValue(val){
-    if(display_value == 0){
+    if(working_value == 0){
         if(awaiting_decimal){
             let str = "0." + val.toString();
             awaiting_decimal = false;
-            display_value = parseFloat(str);
+            working_value = parseFloat(str);
             updateDisplayValue();
             return;
         }
-        display_value = val;
+        working_value = val;
         updateDisplayValue();
     } else {
-        let str = display_value.toString();
+        let str = working_value.toString();
         if(awaiting_decimal){
             str += ".";
             awaiting_decimal = false;
         }
         str += val.toString();
-        display_value = parseFloat(str);
+        working_value = parseFloat(str);
         updateDisplayValue();
     }
 }
 
 function operatorButton(val){
     if(first_value == 0){
-        first_value = display_value;
+        first_value = working_value;
         operator = val;
     } else {
         equal();
         operator = val;
         first_value = total_value;
-        display_value = 0;
+        working_value = 0;
         updateDisplayValue();
     }
-    display_value = 0;
+    working_value = 0;
     updateDisplayValue();
 }
 
 //Based on the operator button selection, which is a series of 1-4 values, each designated to an operation, calls the respective operation function to calculate the given numbers.
 function equal(){
-    second_value = display_value;
+    second_value = working_value;
     if(operator == 1){
         //divide
         divide();
@@ -111,7 +112,7 @@ function divide(){
 //Calls the Math.sqrt js function to get the square root.
 function sqrt(){
     console.log("square root of display value");
-    let c = Math.sqrt(display_value);
+    let c = Math.sqrt(working_value);
     total_value = c;
     updateTotalValue();
 }
@@ -119,7 +120,7 @@ function sqrt(){
 //Called when the +/- button is pressed.
 //Changes the sign of the value entered by the user by multiplying the value by -1.
 function signChange(){
-    display_value = display_value * -1;
+    working_value = working_value * -1;
     updateDisplayValue();
 }
 
@@ -138,7 +139,8 @@ function decimal(){
 
 //Clears the entire calculation. Resets display to '0' and sets all recorded values to '0'.
 function clearCalc(){
-    display_value = 0;
+    working_value = 0;
+    display_value = '';
     first_value = 0;
     second_value = 0;
     total_value = 0;
@@ -152,21 +154,42 @@ function clearCalc(){
 //If the value is 0, we return preventing NaN error
 //If the value is empty or is a leftover '-' negative sign, we swap for 0 and return to avoid NaN issues.
 function deleteVal(){
-    if(display_value == 0){
+    if(working_value == 0){
         return;
     }
-    let str = display_value.toString();
+    let str = working_value.toString();
     let new_str = str.slice(0, str.length - 1);
     if(new_str.length <= 0 || new_str == "-"){
-        display_value = 0;
+        working_value = 0;
         updateDisplayValue();
         return;
     }
-    display_value = parseFloat(new_str);
+    working_value = parseFloat(new_str);
     updateDisplayValue();
+}
+
+function operatorMap(val){
+    if(val == 1){
+        //divide
+        return "/";
+    } else if(operator == 2){
+        //multiply
+        return "x";
+    } else if (operator == 3){
+        //addition
+        return "+";
+    } else if (operator == 4){
+        //subtraction
+        return "-";
+    }
 }
 
 //Updates the text in the top portion of the calculator to match what was pressed by the user.
 function updateDisplayValue(){
-    document.getElementById('screen_top').innerHTML = display_value;
+    if(first_value != 0){
+        display_value = first_value.toString() + operatorMap(operator) + working_value.toString();
+        document.getElementById('screen_top').innerHTML = display_value;
+    } else { 
+        document.getElementById('screen_top').innerHTML = working_value;
+    }
 }
