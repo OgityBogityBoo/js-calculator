@@ -18,36 +18,37 @@
                 <div id="screen_bottom">0</div>
             </div>
             <div class="buttons">
-                <button class="btn lg_btn" id="clear_btn">C</button>
-                <button class="btn lg_btn" id="delete_btn">DEL</button>
+                <button class="btn lg_btn" id="clear_btn"
+                    onclick="clearCalc()">CLEAR</button>
+                <button class="btn lg_btn" id="delete_btn">DELETE</button>
 
                 <button class="btn">%</button>
                 <button class="btn">+/-</button>
                 <button class="btn">√</button>
-                <button class="btn">÷</button>
+                <button class="btn" onclick="operatorButton(1)">÷</button>
 
-                <button class="btn">7</button>
-                <button class="btn">8</button>
-                <button class="btn">9</button>
-                <button class="btn">x</button>
+                <button class="btn" onclick="btnValue(7)">7</button>
+                <button class="btn" onclick="btnValue(8)">8</button>
+                <button class="btn" onclick="btnValue(9)">9</button>
+                <button class="btn" onclick="operatorButton(2)">x</button>
 
-                <button class="btn">4</button>
-                <button class="btn">5</button>
-                <button class="btn">6</button>
-                <button class="btn">+</button>
+                <button class="btn" onclick="btnValue(4)">4</button>
+                <button class="btn" onclick="btnValue(5)">5</button>
+                <button class="btn" onclick="btnValue(6)">6</button>
+                <button class="btn" onclick="operatorButton(3)">+</button>
 
-                <button class="btn">1</button>
-                <button class="btn">2</button>
-                <button class="btn">3</button>
-                <button class="btn">-</button>
+                <button class="btn" onclick="btnValue(1)">1</button>
+                <button class="btn" onclick="btnValue(2)">2</button>
+                <button class="btn" onclick="btnValue(3)">3</button>
+                <button class="btn" onclick="operatorButton(4)">-</button>
 
-                <button class="btn">.</button>
-                <button class="btn">0</button>
-                <button class="btn" id="equals_btn">=</button>
+                <button class="btn" onclick="decimal()">.</button>
+                <button class="btn" onclick="btnValue(0)">0</button>
+                <button class="btn" id="equals_btn" onclick="equal()">=</button>
             </div>
         </div>
         </div>
     </main>
-	<script src="index.js"></script>
+	<script src="script.js"></script>
   </body>
 </html>
