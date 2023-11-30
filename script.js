@@ -8,6 +8,7 @@ let operator = 0;
 //multiply = 2
 //addition = 3
 //subtraction = 4
+//modulo = 5
 let awaiting_decimal = false;
 
 //The on_click function for the numerical buttons 0-9
@@ -66,6 +67,9 @@ function equal(){
     } else if (operator == 4){
         //subtraction
         subtraction();
+    } else if (operator == 5){
+        //subtraction
+        modulo();
     }
 }
 
@@ -122,6 +126,13 @@ function sqrt(){
 function signChange(){
     working_value = working_value * -1;
     updateDisplayValue();
+}
+
+function modulo(){
+    console.log("mod...");
+    let c = first_value % second_value;
+    total_value = c;
+    updateTotalValue();
 }
 
 //Updates the total_value, which is the bottom larger number on the calculator screen. This is the saved value or total value in the calculation as opposed to the smaller value at the top of the screen which is the temporary value the user is entering into the calculator.
@@ -181,6 +192,9 @@ function operatorMap(val){
     } else if (operator == 4){
         //subtraction
         return "-";
+    } else if (operator == 5){
+        //subtraction
+        return "%";
     }
 }
 
