@@ -4,6 +4,7 @@ body {
 .main {
     font-family: 'Lato', sans-serif;
     display: flex;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
     background-color: #EBF3E8;
@@ -11,6 +12,24 @@ body {
     min-height:500px;
     padding:12px;
     margin-top:75px;
+}
+
+footer{
+    margin-top:20px;
+    color: #86A789;
+}
+
+footer a:link{
+    text-decoration: none;
+    color :#86A789;
+}
+
+footer a:hover{
+    color: #4F6F52;
+}
+
+footer a:visited{
+    color :#86A789;
 }
 
 .calculator {
